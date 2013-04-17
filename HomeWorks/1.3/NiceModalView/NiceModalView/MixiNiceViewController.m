@@ -47,8 +47,6 @@
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[sampleImages objectAtIndex:index%allImageCount]];
     // insertSubview と addSubViewの違いを探してみましょう
 	[self.view insertSubview:imageView atIndex:0];
-
-// TODO: XIB上にある二つの各ボタンのTouchUpInsideイベントに　clickModalView：　と　clickPush:　を連結しましょう
 }
 
 - (void)didReceiveMemoryWarning
@@ -65,16 +63,13 @@
 - (IBAction)clickPush:(id)sender
 {
 	MixiNiceViewController *viewController = [[MixiNiceViewController alloc] init];
-// TODO :　hint-> pushViewController: animation:
+    [self presentViewController:viewController animated:YES completion:nil];
 }
 
 - (IBAction)clickModalView:(id)sender
 {
 	MixiNiceViewController *viewController = [[MixiNiceViewController alloc] init];
-
-// TODO :　hint-> presentViewController: animation:
-
-
+    [self presentViewController:viewController animated:YES completion:nil];
 // TODO : UIViewController+NiceAnimation にある関数を使って、いい感じの遷移になるようにしましょう
 }
 
@@ -82,6 +77,5 @@
 {
 // TODO : hint-> dismissViewControllerAnimated:
 }
-
 
 @end
