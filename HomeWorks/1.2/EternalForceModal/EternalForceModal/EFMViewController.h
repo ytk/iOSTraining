@@ -10,6 +10,8 @@
 
 #import "EFMSecondViewController.h"
 
-@interface EFMViewController : UIViewController // TODO EMFSecondViewControllerのdelegateを準拠する
+@interface EFMViewController : UIViewController <EMFSecondViewControllerDelegate>
+
+- (IBAction)buttonTapped:(id)sender;
 
 @end
