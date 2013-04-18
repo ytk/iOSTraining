@@ -33,14 +33,27 @@
     self.title = [NSString stringWithFormat:@"%d", self.navigationController.viewControllers.count];
 
     // TODO ここに navigation bar の右上をpushするボタンを配置するコードを書く
+    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithTitle:@"push" style:UIBarButtonItemStylePlain target:self action:@selector(pressPushButton:)]; // presPopButton: のコロン終了で、勝手に sender が渡ってくれる
+    self.navigationItem.rightBarButtonItem = rightButton;
+    
     // TODO さらに、一番先頭に戻るボタンを左に配置する
-
+    UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithTitle:@"root" style:UIBarButtonItemStylePlain target:self action:@selector(pressRootButton:)]; // presPopButton: のコロン終了で、勝手に sender が渡ってくれる
+    self.navigationItem.leftBarButtonItem = leftButton;
+    self.navigationItem.leftItemsSupplementBackButton = YES;
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)pressPushButton:(id)sender {
+    [self.navigationController pushViewController:[[NIMModalViewController alloc] init] animated:YES];
+}
+
+- (void)pressRootButton:(id)sender {
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 @end
