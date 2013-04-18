@@ -7,6 +7,7 @@
 //
 
 #import "MixiNiceViewController.h"
+#import "UIViewController+NiceAnimation.h"
 
 @interface MixiNiceViewController()
 
@@ -28,6 +29,8 @@
 
     NSInteger allImageCount = 5;
 // なぜ NSArrayじゃなくて　NSMutableArray か？　違いを探してみましょう
+    // 動的に addObjct しているから？
+    // 静的に NSArray で生成すれば置き換えられる？
     NSMutableArray *sampleImages = [NSMutableArray array];
     for (int currentIndex = 0; currentIndex < allImageCount; currentIndex++)
     {
@@ -46,7 +49,10 @@
 
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[sampleImages objectAtIndex:index%allImageCount]];
     // insertSubview と addSubViewの違いを探してみましょう
+    // add は完全に上に被せる。insert は階層を指定して被せられる？
 	[self.view insertSubview:imageView atIndex:0];
+
+// TODO: XIB上にある二つの各ボタンのTouchUpInsideイベントに　clickModalView：　と　clickPush:　を連結しましょう
 }
 
 - (void)didReceiveMemoryWarning
@@ -56,26 +62,36 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    NSLog(@"viewWillAppear");
+    
 	[super viewWillAppear:animated];
 // TODO : UIViewController+NiceAnimation にある関数を使って、いい感じの遷移になるようにしましょう
+    // view が出る度に呼ばれる？
+    [self animationPopFrontScaleUp];
 }
 
 - (IBAction)clickPush:(id)sender
 {
+    NSLog(@"clickPush");
+
 	MixiNiceViewController *viewController = [[MixiNiceViewController alloc] init];
     [self presentViewController:viewController animated:YES completion:nil];
 }
 
 - (IBAction)clickModalView:(id)sender
 {
+    NSLog(@"clickModalView");
+    
 	MixiNiceViewController *viewController = [[MixiNiceViewController alloc] init];
     [self presentViewController:viewController animated:YES completion:nil];
 // TODO : UIViewController+NiceAnimation にある関数を使って、いい感じの遷移になるようにしましょう
+    [self animationPushBack];
 }
 
 - (void)clickClose:(id)sender
 {
-// TODO : hint-> dismissViewControllerAnimated:
+    NSLog(@"clickClose");
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

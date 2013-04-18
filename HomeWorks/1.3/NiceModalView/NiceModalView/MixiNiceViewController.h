@@ -12,5 +12,6 @@
 
 - (IBAction)clickModalView:(id)sender;
 - (IBAction)clickPush:(id)sender;
+- (IBAction)clickClose:(id)sender;
 
 @end
